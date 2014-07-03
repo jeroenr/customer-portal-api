@@ -1,0 +1,1388 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Unite API API documentation</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .parent {
+            color: #999;
+        }
+        .list-group-item > .badge {
+            float: none;
+            margin-right: 6px;
+        }
+        .panel-title > .block > .badge {
+            float: right;
+            margin-left: 5px;
+        }
+        .badge {
+            border-radius: 0;
+            text-transform: uppercase;
+            width: 60px;
+            font-weight: normal;
+            color: #f3f3f6;
+            line-height: normal;
+        }
+        .block .badge {
+            visibility: hidden;
+        }
+        .block.collapsed .badge {
+            visibility: visible;
+        }
+        .badge_get {
+            background-color: #63a8e2;
+        }
+        .badge_post {
+            background-color: #6cbd7d;
+        }
+        .badge_put {
+            background-color: #22bac4;
+        }
+        .badge_delete {
+            background-color: #d26460;
+        }
+        .block {
+            display: block;
+        }
+        .list-group, .panel-group {
+            margin-bottom: 0;
+        }
+        .panel-group .panel+.panel-white {
+            margin-top: 0;
+        }
+        .panel-group .panel-white {
+            border-bottom: 1px solid #F5F5F5;
+            border-radius: 0;
+        }
+        .panel-white:last-child {
+            border-bottom-color: white;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .panel-white .panel-heading {
+            background: white;
+        }
+        .tab-pane ul {
+            padding-left: 2em;
+        }
+        .tab-content {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+        #sidebar {
+            margin-top: 30px;
+        }
+        .resource-description {
+            border-bottom: 1px solid #ddd;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9" role="main">
+                <div class="page-header">
+                    <h1>Unite API API documentation <small>version 1.0</small></h1>
+                    <p>http://mocksvc.mulesoft.com/mocks/0d9ff761-22c9-4679-88b5-aa4e4f254324/api</p>
+
+                    
+                </div>
+
+                
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 id="_users" class="panel-title">/users</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            
+                                <div class="resource-description">
+                                    <p>Operations on users</p>
+
+                                </div>
+                            
+
+                            <div class="panel-group">
+                                <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__users">
+                
+                    <span class="badge badge_get">get</span>
+                
+                <span class="parent"></span>/users
+            </a>
+        </h4>
+    </div>
+    <div id="panel__users" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_users_get" class="list-group-item">
+                        <span class="badge badge_get">get</span>
+                        List all users
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_users_get">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/users
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>List all users</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_users_get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_users_get_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_users_get_request">
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_users_get_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: </li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__users__userId_">
+                
+                    <span class="badge badge_get">get</span>
+                
+                <span class="parent">/users</span>/{userId}
+            </a>
+        </h4>
+    </div>
+    <div id="panel__users__userId_" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_users__userId__get" class="list-group-item">
+                        <span class="badge badge_get">get</span>
+                        Get a user by name
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_users__userId__get">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/users</span>/{userId}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Get a user by name</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_users__userId__get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_users__userId__get_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_users__userId__get_request">
+                                
+                                    <h4>URI Parameters</h4>
+                                    <ul>
+                                        
+                                            <li><strong>userId</strong>: string</li>
+                                        
+                                    </ul>
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_users__userId__get_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: </li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>404</strong>: User with specified name not found</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__users_me">
+                
+                    <span class="badge badge_get">get</span>
+                
+                <span class="parent">/users</span>/me
+            </a>
+        </h4>
+    </div>
+    <div id="panel__users_me" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_users_me_get" class="list-group-item">
+                        <span class="badge badge_get">get</span>
+                        Get currently logged in user
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_users_me_get">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/users</span>/me
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Get currently logged in user</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_users_me_get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_users_me_get_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_users_me_get_request">
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_users_me_get_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: </li>
+                                        
+                                            <li><strong>204</strong>: You are not logged in</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 id="_incidents" class="panel-title">/incidents</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            
+                                <div class="resource-description">
+                                    <p>Operations on incidents</p>
+
+                                </div>
+                            
+
+                            <div class="panel-group">
+                                <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__incidents">
+                
+                    <span class="badge badge_get">get</span>
+                
+                    <span class="badge badge_post">post</span>
+                
+                    <span class="badge badge_delete">delete</span>
+                
+                <span class="parent"></span>/incidents
+            </a>
+        </h4>
+    </div>
+    <div id="panel__incidents" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_get" class="list-group-item">
+                        <span class="badge badge_get">get</span>
+                        List all incidents
+                    </a>
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_post" class="list-group-item">
+                        <span class="badge badge_post">post</span>
+                        Create an incident
+                    </a>
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_delete" class="list-group-item">
+                        <span class="badge badge_delete">delete</span>
+                        Delete all incidents
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_incidents_get">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/incidents
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>List all incidents</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_get_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_get_request">
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_get_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: </li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="_incidents_post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_post">post</span>
+                            <span class="parent"></span>/incidents
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Create an incident</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_post_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_post_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_post_request">
+                                
+
+                                
+                                    <h4>Query Parameters</h4>
+                                    <ul>
+                                        
+                                            <li>
+                                              <strong>idfield</strong>
+                                              <em>
+                                                
+                                                
+                                                  (string)
+                                                
+                                              </em> <br>The field to use as incident identifier
+                                              
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_post_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>201</strong>: Incident created successfully</li>
+                                        
+                                            <li><strong>400</strong>: When id field is missing or is of wrong type</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="_incidents_delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_delete">delete</span>
+                            <span class="parent"></span>/incidents
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Delete all incidents</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_delete_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_delete_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_delete_request">
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_delete_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: Index doesn&#x27;t exist, so nothing to delete</li>
+                                        
+                                            <li><strong>202</strong>: Delete request was valid and is being processed</li>
+                                        
+                                            <li><strong>204</strong>: Delete was performed successfully</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__incidents__incidentId_">
+                
+                    <span class="badge badge_get">get</span>
+                
+                    <span class="badge badge_put">put</span>
+                
+                    <span class="badge badge_delete">delete</span>
+                
+                <span class="parent">/incidents</span>/{incidentId}
+            </a>
+        </h4>
+    </div>
+    <div id="panel__incidents__incidentId_" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents__incidentId__get" class="list-group-item">
+                        <span class="badge badge_get">get</span>
+                        Get an incident by id
+                    </a>
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents__incidentId__put" class="list-group-item">
+                        <span class="badge badge_put">put</span>
+                        Create or update an incident by  not foundid
+                    </a>
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents__incidentId__delete" class="list-group-item">
+                        <span class="badge badge_delete">delete</span>
+                        Delete an incident by id
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_incidents__incidentId__get">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/incidents</span>/{incidentId}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Get an incident by id</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents__incidentId__get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents__incidentId__get_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents__incidentId__get_request">
+                                
+                                    <h4>URI Parameters</h4>
+                                    <ul>
+                                        
+                                            <li><strong>incidentId</strong>: string</li>
+                                        
+                                    </ul>
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents__incidentId__get_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: </li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>404</strong>: Incident not found</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="_incidents__incidentId__put">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_put">put</span>
+                            <span class="parent">/incidents</span>/{incidentId}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Create or update an incident by  not foundid</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents__incidentId__put_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents__incidentId__put_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents__incidentId__put_request">
+                                
+                                    <h4>URI Parameters</h4>
+                                    <ul>
+                                        
+                                            <li><strong>incidentId</strong>: string</li>
+                                        
+                                    </ul>
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents__incidentId__put_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: Incident updated/created</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="_incidents__incidentId__delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_delete">delete</span>
+                            <span class="parent">/incidents</span>/{incidentId}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Delete an incident by id</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents__incidentId__delete_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents__incidentId__delete_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents__incidentId__delete_request">
+                                
+                                    <h4>URI Parameters</h4>
+                                    <ul>
+                                        
+                                            <li><strong>incidentId</strong>: string</li>
+                                        
+                                    </ul>
+                                
+
+                                
+                                    <h4>Query Parameters</h4>
+                                    <ul>
+                                        
+                                            <li>
+                                              <strong>idfield</strong>
+                                              <em>
+                                                
+                                                
+                                                  (string)
+                                                
+                                              </em> <br>The field to use as identifier for the incident
+                                              
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents__incidentId__delete_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: Index doesn&#x27;t exist, so nothing to delete</li>
+                                        
+                                            <li><strong>202</strong>: Delete request is appropriate and is being processed</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__incidents_fieldmapping">
+                
+                    <span class="badge badge_get">get</span>
+                
+                    <span class="badge badge_put">put</span>
+                
+                <span class="parent">/incidents</span>/fieldmapping
+            </a>
+        </h4>
+    </div>
+    <div id="panel__incidents_fieldmapping" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_fieldmapping_get" class="list-group-item">
+                        <span class="badge badge_get">get</span>
+                        Get current field mapping. Which fields are available for searching / facetting and what are the types
+                    </a>
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_fieldmapping_put" class="list-group-item">
+                        <span class="badge badge_put">put</span>
+                        Update the current field mapping. Prevent auto mapping and configure specific types for fields
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_incidents_fieldmapping_get">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/incidents</span>/fieldmapping
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Get current field mapping. Which fields are available for searching / facetting and what are the types</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_fieldmapping_get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_fieldmapping_get_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_fieldmapping_get_request">
+                                
+
+                                
+
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_fieldmapping_get_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: </li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="_incidents_fieldmapping_put">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_put">put</span>
+                            <span class="parent">/incidents</span>/fieldmapping
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Update the current field mapping. Prevent auto mapping and configure specific types for fields</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_fieldmapping_put_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_fieldmapping_put_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_fieldmapping_put_request">
+                                
+
+                                
+
+                                
+                                    <h4>Body</h4>
+                                    
+                                        <p><strong>Type: application/json</strong></p>
+                                        <pre>{
+  &quot;fields&quot; : [
+    &quot;foo&quot;: {
+      &quot;type&quot;: &quot;long&quot;,
+      &quot;store&quot;: false
+    },
+    &quot;bar&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ]
+}
+</pre>
+                                    
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_fieldmapping_put_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>202</strong>: Update request was understood and is being processed</li>
+                                        
+                                            <li><strong>204</strong>: Update was successful</li>
+                                        
+                                            <li><strong>400</strong>: Request body doesn&#x27;t match JSON schema</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__incidents_search">
+                
+                    <span class="badge badge_post">post</span>
+                
+                <span class="parent">/incidents</span>/search
+            </a>
+        </h4>
+    </div>
+    <div id="panel__incidents_search" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_search_post" class="list-group-item">
+                        <span class="badge badge_post">post</span>
+                        Search for incidents
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_incidents_search_post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_post">post</span>
+                            <span class="parent">/incidents</span>/search
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Search for incidents</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_search_post_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_search_post_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_search_post_request">
+                                
+
+                                
+                                    <h4>Query Parameters</h4>
+                                    <ul>
+                                        
+                                            <li>
+                                              <strong>page.num</strong>
+                                              <em>
+                                                
+                                                
+                                                  (integer)
+                                                
+                                              </em> <br>
+                                              
+                                            </li>
+                                        
+                                            <li>
+                                              <strong>page.size</strong>
+                                              <em>
+                                                
+                                                
+                                                  (integer)
+                                                
+                                              </em> <br>
+                                              
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                                    <h4>Body</h4>
+                                    
+                                        <p><strong>Type: application/json</strong></p>
+                                        <pre>{
+  &quot;query&quot;:{
+    &quot;name&quot;: &quot;Jeroen&quot;
+  },
+  &quot;filters&quot;:[
+    {
+      &quot;field&quot;:&quot;foo&quot;,
+      &quot;values&quot;:[&quot;bar&quot;]
+    }
+  ],
+  &quot;facets&quot;:[
+    {
+      &quot;field&quot;:&quot;foo&quot;,
+      &quot;key&quot;:&quot;filteredFoo&quot;,
+      &quot;filters&quot;:[
+        {
+          &quot;field&quot;:&quot;foo&quot;,
+          &quot;values&quot;:[&quot;bar&quot;]
+        }
+      ]
+    }
+  ]
+} 
+</pre>
+                                    
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_search_post_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: Successful search response</li>
+                                        
+                                            <li><strong>400</strong>: When required JSON properties are missing</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__incidents_hsi">
+                
+                    <span class="badge badge_post">post</span>
+                
+                <span class="parent">/incidents</span>/hsi
+            </a>
+        </h4>
+    </div>
+    <div id="panel__incidents_hsi" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_hsi_post" class="list-group-item">
+                        <span class="badge badge_post">post</span>
+                        Retrieve HSI results based on incident search query
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_incidents_hsi_post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_post">post</span>
+                            <span class="parent">/incidents</span>/hsi
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Retrieve HSI results based on incident search query</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_hsi_post_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_hsi_post_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_hsi_post_request">
+                                
+
+                                
+                                    <h4>Query Parameters</h4>
+                                    <ul>
+                                        
+                                            <li>
+                                              <strong>datefield</strong>
+                                              <em>
+                                                
+                                                
+                                                  (string)
+                                                
+                                              </em> <br>
+                                              
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                                    <h4>Body</h4>
+                                    
+                                        <p><strong>Type: application/json</strong></p>
+                                        <pre>{
+  &quot;query&quot;:{
+    &quot;name&quot;: &quot;Jeroen&quot;
+  },
+  &quot;filters&quot;:[
+    {
+      &quot;field&quot;:&quot;foo&quot;,
+      &quot;values&quot;:[&quot;bar&quot;]
+    }
+  ],
+  &quot;stats&quot; : [
+    &quot;category&quot;
+  ],
+  &quot;histograms&quot;:[
+    {
+      &quot;key&quot;:&quot;incidentDate&quot;,
+      &quot;value&quot;: &quot;foo&quot;,
+      &quot;interval&quot;: &quot;month&quot;
+      ]
+    }
+  ]
+} 
+</pre>
+                                    
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_hsi_post_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>200</strong>: Successful search response</li>
+                                        
+                                            <li><strong>400</strong>: When required JSON properties are missing</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__incidents_bulk">
+                
+                    <span class="badge badge_post">post</span>
+                
+                <span class="parent">/incidents</span>/bulk
+            </a>
+        </h4>
+    </div>
+    <div id="panel__incidents_bulk" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_incidents_bulk_post" class="list-group-item">
+                        <span class="badge badge_post">post</span>
+                        Create a large set of incidents at once
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_incidents_bulk_post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_post">post</span>
+                            <span class="parent">/incidents</span>/bulk
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Create a large set of incidents at once</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#_incidents_bulk_post_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#_incidents_bulk_post_response" data-toggle="tab">Response</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_incidents_bulk_post_request">
+                                
+
+                                
+                                    <h4>Query Parameters</h4>
+                                    <ul>
+                                        
+                                            <li>
+                                              <strong>idfield</strong>
+                                              <em>
+                                                
+                                                
+                                                  (string)
+                                                
+                                              </em> <br>The field to use as incident identifier
+                                              
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                                    <h4>Body</h4>
+                                    
+                                        <p><strong>Type: application/json</strong></p>
+                                        <pre>{
+  &quot;incidents&quot;: [
+    {
+      &quot;incidentId&quot;: &quot;12&quot;,
+      &quot;foo&quot;: 2
+    }
+  ]
+}
+</pre>
+                                    
+                                
+                            </div>
+
+                            <div class="tab-pane" id="_incidents_bulk_post_response">
+                                
+                                    <h4>Responses</h4>
+                                    <ul>
+                                        
+                                            <li><strong>201</strong>: Successfully created the incidents</li>
+                                        
+                                            <li><strong>400</strong>: When required JSON properties are missing</li>
+                                        
+                                            <li><strong>401</strong>: Not authorized</li>
+                                        
+                                            <li><strong>500</strong>: Request was appropriate, but couldn&#x27;t be completed</li>
+                                        
+                                    </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+
+            <div class="col-md-3">
+                <div id="sidebar" class="hidden-print affix" role="complementary">
+                    <ul class="nav nav-pills nav-stacked">
+                        
+                            <li><a href="#_users">/users</a></li>
+                        
+                            <li><a href="#_incidents">/incidents</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+error.min=Parameter {0} should be larger or equal to {1}
+error.max=Parameter {0} should be smaller or equal to {1}
+
+login.first=Please login first to obtain a valid service ticket and authorize using the ticket.

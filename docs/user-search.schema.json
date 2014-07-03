@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "query": {
+            "type": "object",
+            "patternProperties": {
+                "^.*$": {
+                    "type": "string"
+                }
+            },
+          "additionalProperties": true
+        },
+        "filters": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "field": {
+                        "type": "string"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "field",
+                    "values"
+                ]
+            }
+        },
+        "facets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "field": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "field"
+                ]
+            }
+        }
+    },
+    "additionalProperties": false
+}

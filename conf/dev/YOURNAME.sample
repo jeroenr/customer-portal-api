@@ -1,0 +1,4 @@
+include "../application.conf"
+
+db.default.user=root
+db.default.password="root"

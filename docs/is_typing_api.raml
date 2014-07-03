@@ -1,0 +1,611 @@
+#%RAML 0.8
+#baseUri: http://localhost:9000/api
+baseUri: http://mocksvc.mulesoft.com/mocks/0d9ff761-22c9-4679-88b5-aa4e4f254324/api
+title: Unite API
+version: 1.0
+traits:
+  - access_controlled:
+      description: Authorization is required
+      responses:
+        401: 
+          description: Not authorized
+  - able_to_fail:
+      description: Stuff can go wrong
+      responses:
+        500:
+          description: Request was appropriate, but couldn't be completed
+          body:
+            application/json:
+              example: |
+                {
+                  "exception": "Timeout while performing request"
+                }
+securitySchemes:
+  - bearer_token:
+      description: A header consisting of a SHA1 token based on an API key and a timestamp
+      type: "x-bearer token"
+      describedBy:
+        headers:
+          Authorization:
+            description: Contains a SHA1 token and a timestamp
+            type: string
+        responses:
+          401:
+            description: Bad or expired token
+  - cas:
+      description: Security protocol which requires a valid CAS session
+      type: "x-cas"
+      settings:
+        requestTokenUri: /cas
+        authorizationUri: /authorize
+      describedBy:
+        queryParameters:
+          ticket:
+            description: Ticket handed out by CAS
+            type: string
+          service:
+            description: Name of the service authenticated for
+            type: string
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "user": "jeroen"
+                  }
+          406:
+            description: Invalid CAS ticket
+          500:
+            description: Couldn't validate ticket. Is CAS service reachable?
+/users:
+  is: ["access_controlled","able_to_fail"]
+  securedBy: ["bearer_token","cas"]
+  description: Operations on users
+  get:
+    description: List all users
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              { "users" :[
+                  {
+                    "id": 1,
+                    "loginname": "ssv1",
+                    "firstname": "Jeroen",
+                    "lastname": "Rosenberg"
+                  }
+                ]
+              }
+  /{userId}:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    get:
+      description: Get a user by name
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": 1,
+                  "loginname": "ssv1",
+                  "firstname": "Jeroen",
+                  "lastname": "Rosenberg"
+                }
+        404:
+          description: "User with specified name not found"
+    
+  /me:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    get:
+      description: Get currently logged in user
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": 2400,
+                  "loginname": "ssv1",
+                  "firstname": "Stephanie",
+                  "lastname": "ShiftSV"
+                }
+        204:
+          description: "You are not logged in"
+/incidents:
+  is: ["access_controlled","able_to_fail"]
+  securedBy: ["bearer_token","cas"]
+  description: Operations on incidents
+  get:
+    description: List all incidents
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "incidents": [
+                  {
+                    "id" : 1,
+                    "description" : "Something baaaad happened"
+                  }
+                ]
+              }      
+  post:
+    description: Create an incident
+    queryParameters:
+      idfield:
+        type: string
+        description: The field to use as incident identifier
+    responses:
+      201: 
+        description: Incident created successfully
+      400:
+        description: When id field is missing or is of wrong type
+        body:
+          application/json:
+            example: |
+              {
+                "exception": "Id field 'incidentId' must have a string value"
+              }
+  delete:
+    description: Delete all incidents
+    responses:
+      200:
+        description: Index doesn't exist, so nothing to delete
+      202:
+        description: Delete request was valid and is being processed
+      204: 
+        description: Delete was performed successfully
+  /{incidentId}:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    description: Operations on a single incident
+    get:
+      description: Get an incident by id
+      responses:
+        200:
+          body:
+            application/json:
+              example: | 
+                {
+                  "incidentId": "12",
+                  "foo": 2
+                }
+        404:
+          description: Incident not found
+    put:
+      description: Create or update an incident by  not foundid
+      responses:
+        200:
+          description: Incident updated/created
+    delete:
+      description: Delete an incident by id
+      queryParameters:
+        idfield:
+          type: string
+          description: The field to use as identifier for the incident
+      responses:
+        200:
+          description: Index doesn't exist, so nothing to delete
+        202:
+          description: Delete request is appropriate and is being processed
+  /fieldmapping:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    get:
+      description: "Get current field mapping. Which fields are available for searching / facetting and what are the types"
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "fields" : [
+                    {
+                      "name": "incidentDate",
+                      "type": "long"
+                    },
+                    {
+                      "name": "incidentId",
+                      "type": "string"
+                    }
+                  ]
+                }
+    put:
+      description: "Update the current field mapping. Prevent auto mapping and configure specific types for fields"
+      body:
+        application/json:
+          example: |
+            {
+              "fields" : [
+                "foo": {
+                  "type": "long",
+                  "store": false
+                },
+                "bar": {
+                  "type": "string"
+                }
+              ]
+            }
+      responses:
+        202:
+          description: "Update request was understood and is being processed"
+        204:
+          description: "Update was successful"
+        400:
+          description: "Request body doesn't match JSON schema"
+  /search:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    description: Search for incidents
+    post:
+      description: Search for incidents
+      queryParameters: 
+        page.num: 
+          type: integer
+          default: 0
+        page.size:
+          type: integer
+          default: 30
+      body:
+        application/json:
+          example: |
+            {
+              "query":{
+                "name": "Jeroen"
+              },
+              "filters":[
+                {
+                  "field":"foo",
+                  "values":["bar"]
+                }
+              ],
+              "facets":[
+                {
+                  "field":"foo",
+                  "key":"filteredFoo",
+                  "filters":[
+                    {
+                      "field":"foo",
+                      "values":["bar"]
+                    }
+                  ]
+                }
+              ]
+            } 
+          schema: !include incident-search.schema.json 
+      responses:
+        200:
+          description: "Successful search response"
+          body:
+            application/json:
+              example: |
+                {
+                  "total": 1,
+                  "pages": 1,
+                  "hits": [
+                    {
+                      "id": 1,
+                      "description": "Something baaaad happened"
+                    }
+                  ],
+                  "facets": [
+                    {
+                      "field": "type",
+                      "values": [
+                        {
+                          "value": "Non Conformity",
+                          "count": 2
+                        },
+                        {
+                          "value": "Near miss",
+                          "count": 0
+                        }
+                      ]
+                    }
+                  ]
+                }
+        400:
+          description: "When required JSON properties are missing"
+          body:
+            application/json:
+              example: |
+                {
+                  "exception": "The request body violates the schema definition",
+                  "schema_uri": "localhost:9000/schema/incident-search.json",
+                  "errors": [
+                    {
+                      "level": "error",
+                      "schema": {
+                        "loadingURI": "#",
+                        "pointer": "/properties/facets/items"
+                      },
+                      "instance": {
+                        "pointer": "/facets/0"
+                      },
+                      "domain": "validation",
+                      "keyword": "required",
+                      "message": "object has missing required properties ([\"field\"])",
+                      "required": [
+                        "field"
+                      ],
+                      "missing": [
+                        "field"
+                      ]
+                    }
+                  ]
+                }
+  /hsi:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    description: Retrieve HSI results for incidents
+    post:
+      description: Retrieve HSI results based on incident search query
+      queryParameters: 
+        datefield: 
+          type: string
+          default: incidentDate
+      body:
+        application/json:
+          example: |
+            {
+              "query":{
+                "name": "Jeroen"
+              },
+              "filters":[
+                {
+                  "field":"foo",
+                  "values":["bar"]
+                }
+              ],
+              "stats" : [
+                "category"
+              ],
+              "histograms":[
+                {
+                  "key":"incidentDate",
+                  "value": "foo",
+                  "interval": "month"
+                  ]
+                }
+              ]
+            } 
+          schema: !include incident-hsi.schema.json 
+      responses:
+        200:
+          description: Successful search response
+          body:
+            application/json:
+              example: |
+                {
+                  "stats": {
+                    "category": [
+                      {
+                        "value": "Incident",
+                        "count": 11
+                      },
+                      {
+                        "value": "Quasi Loss",
+                        "count": 3
+                      },
+                      {
+                        "value": "NC",
+                        "count": 2
+                      }
+                    ]
+                  },
+                  "hsi": {
+                    "hpifr": {
+                      "per12months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 1.02188851128216
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 1.1225986212243733
+                        }
+                      ],
+                      "per3months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 0.7838867992208792
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 1.557853701335766
+                        }
+                      ]
+                    },
+                    "ltifr": {
+                      "per12months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 0.45417267168096004
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 0.49893272054416593
+                        }
+                      ],
+                      "per3months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 0.47033207953252754
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 0.9347122208014595
+                        }
+                      ]
+                    },
+                    "fr": {
+                      "per12months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 2.49794969424528
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 2.744129962992913
+                        }
+                      ],
+                      "per3months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 1.5677735984417585
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 2.8041366624043786
+                        }
+                      ]
+                    },
+                    "trifr": {
+                      "per12months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 0.6812590075214401
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 0.748399080816249
+                        }
+                      ],
+                      "per3months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 0.6271094393767034
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 1.2462829610686128
+                        }
+                      ]
+                    },
+                    "loss": {
+                      "per12months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 897156
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 897156
+                        }
+                      ],
+                      "per3months": [
+                        {
+                          "time": 1393632000000,
+                          "label": "2014-03-01T00:00:00.000Z",
+                          "value": 882741"
+                        },
+                        {
+                          "time": 1396310400000,
+                          "label": "2014-04-01T00:00:00.000Z",
+                          "value": 882741
+                        }
+                      ]
+                    }
+                  }
+                }
+        400:
+          description: When required JSON properties are missing
+          body:
+            application/json:
+              example: |
+                {
+                  "exception": "The request body violates the schema definition",
+                  "schema_uri": "localhost:9000/schema/incident-hsi.json",
+                  "errors": [
+                    {
+                      "level": "error",
+                      "schema": {
+                        "loadingURI": "#",
+                        "pointer": ""
+                      },
+                      "instance": {
+                        "pointer": ""
+                      },
+                      "domain": "validation",
+                      "keyword": "additionalProperties",
+                      "message": "object instance has properties which are not allowed by the schema: [\"foo\"]",
+                      "unwanted": [
+                        "foo"
+                      ]
+                    }
+                  ]
+                }
+  /bulk:
+    is: ["access_controlled","able_to_fail"]
+    securedBy: ["bearer_token","cas"]
+    description: Bulk indexing of incidents
+    post:
+      description: Create a large set of incidents at once
+      queryParameters:
+        idfield: 
+          description: The field to use as incident identifier
+          type: string
+      body:
+        application/json:
+          example: |
+            {
+              "incidents": [
+                {
+                  "incidentId": "12",
+                  "foo": 2
+                }
+              ]
+            }
+          schema: !include incident-bulkcreate.schema.json 
+      responses:
+        201:
+          description: Successfully created the incidents
+        400:
+          description: When required JSON properties are missing
+          body:
+            application/json:
+              example: |
+                {
+                  "exception": "The request body violates the schema definition",
+                  "schema_uri": "localhost:9000/schema/incident-bulkcreate.json",
+                  "errors": [
+                    {
+                      "level": "error",
+                      "schema": {
+                        "loadingURI": "#",
+                        "pointer": "/properties/incidents"
+                      },
+                      "instance": {
+                        "pointer": "/incidents"
+                      },
+                      "domain": "validation",
+                      "keyword": "minItems",
+                      "message": "array is too short: must have at least 1 elements but instance has 0 elements",
+                      "minItems": 1,
+                      "found": 0
+                    }
+                  ]
+                }
