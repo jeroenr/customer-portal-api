@@ -75,7 +75,7 @@ object UserController extends Controller with JsonActions {
     BodyParam(String)
     )
 
-  val DEFAULT_ID_FIELD = "userId"
+  val DEFAULT_ID_FIELD = "id"
   val INDEX_NAME = ConfigUtil.getStringOrElse("elasticsearch.index.name", "users")
   val DEFAULT_DOCUMENT_TYPE = "user"
 
