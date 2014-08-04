@@ -34,6 +34,10 @@ object CustomerService {
 		customer
 	}
 
+	def delete(id: Long) = transaction {
+		Library.customers.delete(id)
+	}
+
 	def update(id: Long, key: String, secret: String) = transaction {
 		val customer = Customer.byId(id).get
 		customer.auth_key = key
