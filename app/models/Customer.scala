@@ -43,6 +43,18 @@ object Customer {
       select(u)
   ).headOption
 
+  def byAuthKey(authKey: String) = fromCustomers(
+    u =>
+      where(u.auth_key === authKey)
+      select(u)
+  ).headOption
+
+  def deleteByAuthKey(authKey: String) = 
+    Library.customers.deleteWhere(
+      c =>
+        c.auth_key === authKey
+    )
+
 }
 
 

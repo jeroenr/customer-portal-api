@@ -59,7 +59,7 @@ object CustomerController extends Controller with JsonActions {
     BodyParam(String)
     )
 
-  def delete(id: Long) = JsonDeleteAction {
+  def delete(id: String) = JsonDeleteAction {
     implicit request =>
       CustomerService.delete(id)
       Ok
@@ -80,7 +80,7 @@ object CustomerController extends Controller with JsonActions {
     }
   }
 
-  def byId(id: Long) = JsonGetAction {
+  def byId(id: String) = JsonGetAction {
     implicit request =>
       CustomerService.byId(id) match {
         case Some(customer) => Ok(toJson(customer))
@@ -88,7 +88,7 @@ object CustomerController extends Controller with JsonActions {
       }
   }
 
-  def keypair(id: Long) = JsonGetAction {
+  def keypair(id: String) = JsonGetAction {
     implicit request =>
       CustomerService.byId(id) match {
         case Some(customer) => Ok((toJson(customer).toMapOf[AnyRef] + ("auth_secret" -> customer.auth_secret)).toJson)
@@ -96,7 +96,7 @@ object CustomerController extends Controller with JsonActions {
       }
   }
 
-  def regenerateKeypair(id: Long) = JsonGetAction {
+  def regenerateKeypair(id: String) = JsonGetAction {
     implicit request =>
       val key = KeyService.uniqueKey(20)
       val secret = KeyService.uniqueKey(20)

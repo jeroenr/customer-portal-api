@@ -24,11 +24,11 @@ DELETE      /api/users/:id              controllers.UserController.delete(id, id
 GET         /api/customers                  controllers.CustomerController.list(page: Pager)
 POST        /api/customers                  controllers.CustomerController.create
 
-GET			/api/customers/:id 		       controllers.CustomerController.byId(id: Long)
-DELETE  	/api/customers/:id             controllers.CustomerController.delete(id: Long)
+GET			/api/customers/:id 		       controllers.CustomerController.byId(id: String)
+DELETE  	/api/customers/:id             controllers.CustomerController.delete(id: String)
 
-GET			/api/customers/:id/keypair	   controllers.CustomerController.keypair(id: Long)
-PUT			/api/customers/:id/keypair     controllers.CustomerController.regenerateKeypair(id: Long)
+GET			/api/customers/:id/keypair	   controllers.CustomerController.keypair(id: String)
+PUT			/api/customers/:id/keypair     controllers.CustomerController.regenerateKeypair(id: String)
 
 # Api docs
 GET         /api/resources.json             controllers.ApiDocs.discover

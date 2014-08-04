@@ -34,12 +34,12 @@ object CustomerService {
 		customer
 	}
 
-	def delete(id: Long) = transaction {
-		Library.customers.delete(id)
+	def delete(id: String) = transaction {
+		Customer.deleteByAuthKey(id)
 	}
 
-	def update(id: Long, key: String, secret: String) = transaction {
-		val customer = Customer.byId(id).get
+	def update(id: String, key: String, secret: String) = transaction {
+		val customer = Customer.byAuthKey(id).get
 		customer.auth_key = key
 		customer.auth_secret = secret
 		Library.customers.update(customer)
@@ -49,8 +49,8 @@ object CustomerService {
 		Customer.all(page.offset, page.size).toList
 	}
 
-	def byId(id: Long) = transaction {
-		Customer.byId(id)
+	def byId(id: String) = transaction {
+		Customer.byAuthKey(id)
 	}
 }
 
