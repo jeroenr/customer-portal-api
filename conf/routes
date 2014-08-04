@@ -25,11 +25,10 @@ GET         /api/customers                  controllers.CustomerController.list(
 POST        /api/customers                  controllers.CustomerController.create
 
 GET			/api/customers/:id 		       controllers.CustomerController.byId(id: Long)
-GET			/api/customers/:id/keypair	   controllers.CustomerController.keypair(id: Long)
-PUT			/api/customers/:id/keypair     controllers.CustomerController.regenerateKeypair(id: Long)
 DELETE  	/api/customers/:id             controllers.CustomerController.delete(id: Long)
 
-
+GET			/api/customers/:id/keypair	   controllers.CustomerController.keypair(id: Long)
+PUT			/api/customers/:id/keypair     controllers.CustomerController.regenerateKeypair(id: Long)
 
 # Api docs
 GET         /api/resources.json             controllers.ApiDocs.discover

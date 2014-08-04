@@ -71,7 +71,7 @@ object CustomerController extends Controller with JsonActions {
     }
   }
 
-  def create = JsonPostAction {
+  def create = JsonPostAction("customer-create") {
     implicit parameterMap => {
       val key = KeyService.uniqueKey(20)
       val secret = KeyService.uniqueKey(20)

@@ -4,6 +4,24 @@ package models
  * Created by jeroen on 4/3/14.
  */
 trait JsonSchemas {
+  val CUSTOMER_CREATE_SCHEMA =
+    """
+      |{
+      |    "$schema": "http://json-schema.org/draft-04/schema#",
+      |    "type": "object",
+      |    "properties": {
+      |        "name": {
+      |            "type": "string",
+      |            "minLength": 1
+      |        }
+      |    },
+      |    "required": [
+      |        "name"
+      |    ],
+      |    "additionalProperties": false
+      |}
+    """.stripMargin
+
   val USER_SEARCH_SCHEMA =
     """
       |{
@@ -160,6 +178,7 @@ trait JsonSchemas {
 
   val schemaMap = Map(
     "user-search" -> USER_SEARCH_SCHEMA,
-    "user-fieldmapping" -> USER_FIELD_MAPPING_SCHEMA
+    "user-fieldmapping" -> USER_FIELD_MAPPING_SCHEMA,
+    "customer-create" -> CUSTOMER_CREATE_SCHEMA
   )
 }
