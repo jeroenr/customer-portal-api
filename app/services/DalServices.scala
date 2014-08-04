@@ -1,8 +1,10 @@
 package services
 
 import org.squeryl.PrimitiveTypeMode._
-import models.{User, Customer, Library}
+import models.{User, Customer, Key, Library}
 import binders.{Pager}
+import scala.util.Random
+import scala.annotation.tailrec
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,8 +26,8 @@ object UserService {
 }
 
 object CustomerService {
-	def create(key: String, secret: String) = { 
-		val customer = new Customer(key, secret)
+	def create(name: String, key: String, secret: String) = { 
+		val customer = new Customer(name, key, secret)
 		transaction {
 			Library.customers.insert(customer)
 		}
@@ -38,5 +40,19 @@ object CustomerService {
 
 	def byId(id: Long) = transaction {
 		Customer.byId(id)
+	}
+}
+
+object KeyService {
+	@tailrec
+	def uniqueKey(length: Int): String = {
+		val key = Random.alphanumeric.take(length).mkString
+		val existingKey = transaction {
+			Key.byValue(key)
+		}
+		existingKey match {
+			case Some(_) => uniqueKey(length)
+			case _ => key
+		}
 	}
 }

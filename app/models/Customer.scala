@@ -19,6 +19,7 @@ import utils.ConfigUtil
  */
 
 class Customer(
+ @Column("name") val name: String,
  @Column("auth_key") val auth_key: String,
  @Column("auth_secret") @transient val auth_secret: String
 ) extends KeyedEntity[Long] {

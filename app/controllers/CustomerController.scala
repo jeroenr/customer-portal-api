@@ -55,8 +55,6 @@ object CustomerController extends Controller with JsonActions {
     BodyParam(String)
     )
 
-  val ONE_HUNDRED_MB_IN_BYTES = 1024 * 1024 * 100
-
   def delete(id: Long) = JsonDeleteAction {
     implicit request =>
       Ok
@@ -70,7 +68,9 @@ object CustomerController extends Controller with JsonActions {
 
   def create = JsonPostAction {
     implicit parameterMap => {
-      val customer = CustomerService.create("key","secret")
+      val key = KeyService.uniqueKey(20)
+      val secret = KeyService.uniqueKey(20)
+      val customer = CustomerService.create(parameterMap("name").asInstanceOf[String], key, secret)
       Created(toJson(customer))
     }
   }
