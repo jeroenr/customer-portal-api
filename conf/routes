@@ -19,6 +19,18 @@ PUT         /api/users/:id              controllers.UserController.update(id, id
 GET         /api/users/:id              controllers.UserController.byId(id)
 DELETE      /api/users/:id              controllers.UserController.delete(id, idfield: Option[String])
 
+# Customer portal
+
+GET         /api/customers                  controllers.CustomerController.list(page: Pager)
+POST        /api/customers                  controllers.CustomerController.create
+
+GET			/api/customers/:id 		       controllers.CustomerController.byId(id: Long)
+GET			/api/customers/:id/details	   controllers.CustomerController.details(id: Long)
+PUT			/api/customers/:id             controllers.CustomerController.update(id: Long)
+#DELETE  	/api/customers/:id             controllers.CustomerController.delete(id)
+
+
+
 # Api docs
 GET         /api/resources.json             controllers.ApiDocs.discover
 GET         /api/:id.json                   controllers.ApiDocs.resource(id)

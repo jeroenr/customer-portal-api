@@ -1,6 +1,7 @@
 package models
 
 import org.squeryl.Schema
+import org.squeryl.KeyedEntity
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.annotations.Column
 import org.squeryl.dsl.fsm.SelectState
@@ -17,55 +18,13 @@ import utils.ConfigUtil
  * To change this template use File | Settings | File Templates.
  */
 
-/*
-+----------------------+--------------+------+-----+---------+-------+
-| ID                   | int(11)      | NO   | PRI | NULL    |       |
-| SYSTEM               | int(11)      | YES  |     | NULL    |       |
-| DATE_CREATED         | datetime     | YES  |     | NULL    |       |
-| DATE_MODIFIED        | datetime     | YES  |     | NULL    |       |
-| CREATED_BY           | varchar(50)  | YES  |     | NULL    |       |
-| MODIFIED_BY          | varchar(50)  | YES  |     | NULL    |       |
-| ENTITY_CLASS         | varchar(100) | YES  |     | NULL    |       |
-| ARCHIVED             | int(11)      | NO   |     | NULL    |       |
-| ARCHIVED_BY          | varchar(50)  | YES  |     | NULL    |       |
-| DATE_ARCHIVED        | datetime     | YES  |     | NULL    |       |
-| LAST_MODIFICATION_NR | bigint(20)   | NO   |     | NULL    |       |
-| ENABLED              | int(11)      | YES  |     | NULL    |       |
-| ACL_ID               | int(11)      | NO   | MUL | NULL    |       |
-| ORG_CONTEXT          | varchar(254) | YES  | MUL | NULL    |       |
-| ORG_CONTEXT_ID       | int(11)      | YES  | MUL | NULL    |       |
-| ACL_ORG_ID           | varchar(100) | YES  | MUL | NULL    |       |
-| NR                   | varchar(50)  | YES  | UNI | NULL    |       |
-| NAME                 | varchar(254) | YES  |     | NULL    |       |
-| SEQ_NR               | bigint(20)   | YES  |     | NULL    |       |
-| LIFECYCLE_ID         | int(11)      | YES  |     | NULL    |       |
-| STATE_ID             | int(11)      | YES  |     | NULL    |       |
-| PREVIOUS_STATE_ID    | int(11)      | YES  |     | NULL    |       |
-| TRANSITION_DATE      | datetime     | YES  |     | NULL    |       |
-| LOGIN_NAME           | varchar(50)  | YES  | UNI | NULL    |       |
-| PASSWORD_VALUE       | varchar(50)  | YES  |     | NULL    |       |
-| FIRST_NAME           | varchar(50)  | YES  |     | NULL    |       |
-| LAST_NAME            | varchar(50)  | YES  |     | NULL    |       |
-| EMAIL                | varchar(100) | YES  |     | NULL    |       |
-| CONFIRM_VALUE        | varchar(254) | YES  |     | NULL    |       |
-| SCQ_ENABLED_ON       | datetime     | YES  |     | NULL    |       |
-| PCQ_ENABLED_ON       | datetime     | YES  |     | NULL    |       |
-| LOTO_ENABLED_ON      | datetime     | YES  |     | NULL    |       |
-| CHQ_ENABLED_ON       | datetime     | YES  |     | NULL    |       |
-| ICQ_ENABLED_ON       | datetime     | YES  |     | NULL    |       |
-| MODIFIED             | datetime     | YES  |     | NULL    |       |
-| CREATED              | datetime     | YES  |     | NULL    |       |
-| LAST_LOGIN           | datetime     | YES  |     | NULL    |       |
-+----------------------+--------------+------+-----+---------+-------+
-
-*/
-case class User(
-                 @Column("ID") id: Int,
-                 @Column("LOGIN_NAME") loginname: String,
-                 @Column("PASSWORD_VALUE") @transient password_value: String,
-                 @Column("FIRST_NAME") firstname: String,
-                 @Column("LAST_NAME") lastname: String
-                 ) {
+class User(
+ @Column("login_name") val login_name: String,
+ @Column("password_value") @transient val password_value: String,
+ @Column("first_name") val first_name: String,
+ @Column("last_name") val last_name: String
+) extends KeyedEntity[Long] {
+  val id: Long = 0 
   def isAuthorized(key: String, timestamp: Long) = Codecs.sha1(timestamp + User.SALT + password_value) == key
 }
 
@@ -82,7 +41,7 @@ object User {
 
   def byLoginName(loginName: String) = fromUsers(
     u =>
-      where(u.loginname === loginName)
+      where(u.login_name === loginName)
       select(u)
   ).headOption
 

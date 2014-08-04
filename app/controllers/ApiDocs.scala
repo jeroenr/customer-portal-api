@@ -30,6 +30,20 @@ object ApiDocs extends Controller {
           UserController.usersSearchApi
         ),
         models = Map()
+      ),
+      ResourceDeclaration(
+        path = "/customers.{format}",
+        description = "Operations on customers",
+        resourcePath = "/customers",
+        basePath = "http://"+host+"/api",
+        swaggerVersion = "1.1-SNAPSHOT",
+        apiVersion = "1",
+        apis = List(
+          CustomerController.customersApi,
+          CustomerController.customerApi,
+          CustomerController.customerDetailsApi
+        ),
+        models = Map()
       )
     )
   )

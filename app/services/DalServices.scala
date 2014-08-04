@@ -1,7 +1,7 @@
 package services
 
 import org.squeryl.PrimitiveTypeMode._
-import models.{User}
+import models.{User, Customer, Library}
 import binders.{Pager}
 
 /**
@@ -21,4 +21,22 @@ object UserService {
     User.byLoginName(loginName)
   }
 
+}
+
+object CustomerService {
+	def create(key: String, secret: String) = { 
+		val customer = new Customer(key, secret)
+		transaction {
+			Library.customers.insert(customer)
+		}
+		customer
+	}
+
+	def all(page: Pager) = transaction {
+		Customer.all(page.offset, page.size).toList
+	}
+
+	def byId(id: Long) = transaction {
+		Customer.byId(id)
+	}
 }
