@@ -41,7 +41,7 @@ object ApiDocs extends Controller {
         apis = List(
           CustomerController.customersApi,
           CustomerController.customerApi,
-          CustomerController.customerDetailsApi
+          CustomerController.customerKeypairApi
         ),
         models = Map()
       )

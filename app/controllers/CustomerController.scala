@@ -31,7 +31,7 @@ object CustomerController extends Controller with JsonActions {
 
   lazy val customersApi = Api("/customers") describedBy "A customers API" withOperations(listOperation, createOperation)
   lazy val customerApi = Api("/customers/{customerId}") describedBy "A customer API" withOperations(showOperation, updateOperation, deleteOperation)
-  lazy val customerDetailsApi = Api("/customers/{customerId}/details") describedBy "A customer API" withOperations(detailsOperation)
+  lazy val customerKeypairApi = Api("/customers/{customerId}/keypair") describedBy "A customer keypair API" withOperations(keypairOperation, regenerateKeypairOperation)
 
 
   lazy val listOperation = Operation("listCustomer", GET, "List all customers") takes(
@@ -41,7 +41,11 @@ object CustomerController extends Controller with JsonActions {
   lazy val showOperation = Operation("showCustomer", GET, "Get a customer") takes (
     PathParam("CustomerId", String) is "The customer id"
     )
-  lazy val detailsOperation = Operation("showCustomerDetails", GET, "Get customer details") takes (
+  lazy val keypairOperation = Operation("showCustomerKeypair", GET, "Get customer keypair") takes (
+    PathParam("CustomerId", String) is "The customer id"
+    )
+
+  lazy val regenerateKeypairOperation = Operation("regenerateCustomerKeypair", PUT, "Regenerate customer keypair") takes (
     PathParam("CustomerId", String) is "The customer id"
     )
   lazy val createOperation = Operation("createOrUpdateCustomer", POST, "Create a customer") takes(
@@ -89,11 +93,24 @@ object CustomerController extends Controller with JsonActions {
       }
   }
 
-  def details(id: Long) = JsonGetAction {
+  def keypair(id: Long) = JsonGetAction {
     implicit request =>
       CustomerService.byId(id) match {
         case Some(customer) => Ok((toJson(customer).toMapOf[AnyRef] + ("auth_secret" -> customer.auth_secret)).toJson)
         case _ => NotFound
+      }
+  }
+
+  def regenerateKeypair(id: Long) = JsonGetAction {
+    implicit request =>
+      val key = KeyService.uniqueKey(20)
+      val secret = KeyService.uniqueKey(20)
+      val isRegenerated = Try(CustomerService.update(id, key, secret))
+      isRegenerated match {
+        case Success(_) => Ok
+        case Failure(f) => 
+          Logger.error(s"Couldn't update customer [$id]", f)
+          NotFound(wrapExceptionInJson(f))
       }
   }
 

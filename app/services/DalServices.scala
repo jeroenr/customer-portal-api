@@ -34,6 +34,13 @@ object CustomerService {
 		customer
 	}
 
+	def update(id: Long, key: String, secret: String) = transaction {
+		val customer = Customer.byId(id).get
+		customer.auth_key = key
+		customer.auth_secret = secret
+		Library.customers.update(customer)
+	}
+
 	def all(page: Pager) = transaction {
 		Customer.all(page.offset, page.size).toList
 	}
@@ -52,7 +59,12 @@ object KeyService {
 		}
 		existingKey match {
 			case Some(_) => uniqueKey(length)
-			case _ => key
+			case _ => {
+				transaction {
+					Library.keys.insert(new Key(key))
+				}
+				key
+			}
 		}
 	}
 }
