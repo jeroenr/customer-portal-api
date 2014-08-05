@@ -27,3 +27,4 @@ CREATE TABLE key (
  
 DROP TABLE user;
 DROP TABLE customer;
+DROP TABLE key;
