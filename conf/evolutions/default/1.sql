@@ -17,11 +17,11 @@ CREATE TABLE customer (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE key (
+CREATE TABLE key_register (
     id bigint(20) NOT NULL AUTO_INCREMENT,
     value varchar(255) NOT NULL,
     PRIMARY KEY (id)
-) 
+); 
 
 # --- !Downs
  

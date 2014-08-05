@@ -9,5 +9,5 @@ import org.squeryl.Schema
 object Library extends Schema {
   val users = table[User]("user")
   val customers = table[Customer]("customer")
-  val keys = table[Key]("key")
+  val keys = table[Key]("key_register")
 }
