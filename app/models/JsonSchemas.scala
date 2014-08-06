@@ -13,10 +13,14 @@ trait JsonSchemas {
       |        "name": {
       |            "type": "string",
       |            "minLength": 1
+      |        },
+      |        "login_name": {
+      |            "type": "string",
+      |            "minLength": 1
       |        }
       |    },
       |    "required": [
-      |        "name"
+      |        "name", "login_name"
       |    ],
       |    "additionalProperties": false
       |}

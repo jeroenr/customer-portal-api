@@ -6,14 +6,26 @@ CREATE TABLE user (
     password_value varchar(255) NOT NULL,
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
+    created_at timestamp,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE customer (
     id bigint(20) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
+    login_name varchar(255) NOT NULL,
+    password_value varchar(255) NOT NULL,
+    created_at timestamp,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE keypair ( 
+    id bigint(20) NOT NULL AUTO_INCREMENT,
+    customer_id bigint(20) NOT NULL,
     auth_key varchar(255) NOT NULL,
     auth_secret varchar(255) NOT NULL,
+    created_at timestamp,
+    FOREIGN KEY (customer_id) REFERENCES customer(id),
     PRIMARY KEY (id)
 );
 

@@ -59,7 +59,7 @@ object CustomerController extends Controller with JsonActions {
     BodyParam(String)
     )
 
-  def delete(id: String) = JsonDeleteAction {
+  def delete(id: Long) = JsonDeleteAction {
     implicit request =>
       CustomerService.delete(id)
       Ok
@@ -67,40 +67,36 @@ object CustomerController extends Controller with JsonActions {
 
   def list(page: Pager) = JsonGetAction {
     implicit request => {
-        Ok(toJson(Map("customers" -> CustomerService.all(page))))
+        Ok(CustomerService.all(page))
     }
   }
 
   def create = JsonPostAction("customer-create") {
     implicit parameterMap => {
-      val key = KeyService.uniqueKey(20)
-      val secret = KeyService.uniqueKey(20)
-      val customer = CustomerService.create(parameterMap("name").asInstanceOf[String], key, secret)
-      Created(toJson(customer))
+      val customer = CustomerService.create(parameterMap("name").asInstanceOf[String], parameterMap("login_name").asInstanceOf[String])
+      Created(customer)
     }
   }
 
-  def byId(id: String) = JsonGetAction {
+  def byId(id: Long) = JsonGetAction {
     implicit request =>
       CustomerService.byId(id) match {
-        case Some(customer) => Ok(toJson(customer))
+        case Some(customer) => Ok(customer)
         case _ => NotFound
       }
   }
 
-  def keypair(id: String) = JsonGetAction {
+  def keypair(id: Long) = JsonGetAction {
     implicit request =>
       CustomerService.byId(id) match {
-        case Some(customer) => Ok((toJson(customer).toMapOf[AnyRef] + ("auth_secret" -> customer.auth_secret)).toJson)
+        case Some(customer) => Ok(customer)
         case _ => NotFound
       }
   }
 
-  def regenerateKeypair(id: String) = JsonGetAction {
+  def regenerateKeypair(id: Long) = JsonGetAction {
     implicit request =>
-      val key = KeyService.uniqueKey(20)
-      val secret = KeyService.uniqueKey(20)
-      val isRegenerated = Try(CustomerService.update(id, key, secret))
+      val isRegenerated = Try(CustomerService.regenerateKeypair(id))
       isRegenerated match {
         case Success(_) => Ok
         case Failure(f) => 

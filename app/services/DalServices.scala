@@ -1,10 +1,11 @@
 package services
 
 import org.squeryl.PrimitiveTypeMode._
-import models.{User, Customer, Key, Library}
+import models._
 import binders.{Pager}
 import scala.util.Random
 import scala.annotation.tailrec
+import net.fromamsterdamwithlove.json.utils.JsonUtil._
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,31 +27,38 @@ object UserService {
 }
 
 object CustomerService {
-	def create(name: String, key: String, secret: String) = { 
-		val customer = new Customer(name, key, secret)
-		transaction {
+	def create(name: String, login_name: String) = {
+		val key = KeyService.uniqueKey(20)
+      	val secret = KeyService.uniqueKey(20)
+      	val password_value = KeyService.uniqueKey(8)
+      	// TODO: hash password
+	    val customer = new Customer(name, login_name, password_value)
+		
+		transaction {		
 			Library.customers.insert(customer)
+			customer.keypairs.associate(new Keypair(key, secret, customer.id)) 
+			toJson(customer)
 		}
-		customer
 	}
 
-	def delete(id: String) = transaction {
-		Customer.deleteByAuthKey(id)
+	def delete(id: Long) = transaction {
+		Library.customers.delete(id)
 	}
 
-	def update(id: String, key: String, secret: String) = transaction {
-		val customer = Customer.byAuthKey(id).get
-		customer.auth_key = key
-		customer.auth_secret = secret
-		Library.customers.update(customer)
+	def regenerateKeypair(id: Long) = transaction {
+		val key = KeyService.uniqueKey(20)
+      	val secret = KeyService.uniqueKey(20)
+		val keypair = new Keypair(key, secret, id)
+		val customer = Customer.byId(id).get
+		customer.keypairs.associate(keypair)
 	}
 
 	def all(page: Pager) = transaction {
-		Customer.all(page.offset, page.size).toList
+		toJson(Map("customers" -> Customer.all(page.offset, page.size).toList))
 	}
 
-	def byId(id: String) = transaction {
-		Customer.byAuthKey(id)
+	def byId(id: Long) = transaction {
+		Customer.byId(id).map(toJson(_))
 	}
 }
 
