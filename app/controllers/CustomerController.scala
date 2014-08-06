@@ -19,6 +19,7 @@ import scala.util.Success
 import play.api.Logger
 import binders.{Period, Pager}
 import org.joda.time.{DateTimeZone, DateTime}
+import play.api.mvc.Security.AuthenticatedRequest
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,6 +31,7 @@ import org.joda.time.{DateTimeZone, DateTime}
 object CustomerController extends Controller with JsonActions {
 
   lazy val customersApi = Api("/customers") describedBy "A customers API" withOperations(listOperation, createOperation)
+  lazy val meApi = Api("/customers/me") describedBy "A me API" withOperations (meOperation)
   lazy val customerApi = Api("/customers/{customerId}") describedBy "A customer API" withOperations(showOperation, updateOperation, deleteOperation)
   lazy val customerKeypairsApi = Api("/customers/{customerId}/keypairs") describedBy "A customer keypairs API" withOperations(keypairOperation, regenerateKeypairOperation)
   lazy val customerKeypairApi = Api("/customers/{customerId}/keypairs/{keypairId}") describedBy "A customer keypair API" withOperations(deleteKeypairOperation)
@@ -44,6 +46,8 @@ object CustomerController extends Controller with JsonActions {
   lazy val keypairOperation = Operation("showCustomerKeypair", GET, "Get customer keypair") takes (
     PathParam("CustomerId", String) is "The customer id"
     )
+
+  lazy val meOperation = Operation("me", GET, "Get the currently logged in customer")
 
   lazy val regenerateKeypairOperation = Operation("regenerateCustomerKeypair", POST, "Regenerate customer keypair") takes (
     PathParam("CustomerId", String) is "The customer id"
@@ -88,6 +92,14 @@ object CustomerController extends Controller with JsonActions {
       CustomerService.byId(id) match {
         case Some(customer) => Ok(customer)
         case _ => NotFound
+      }
+  }
+
+   def me = JsonGetAction {
+    implicit request =>
+      request.asInstanceOf[AuthenticatedRequest[AnyContent, Option[Map[String, String]]]].user match {
+        case Some(customer) => Ok(toJson(customer))
+        case _ => NoContent
       }
   }
 

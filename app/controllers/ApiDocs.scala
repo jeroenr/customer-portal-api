@@ -39,6 +39,7 @@ object ApiDocs extends Controller {
         swaggerVersion = "1.1-SNAPSHOT",
         apiVersion = "1",
         apis = List(
+          CustomerController.meApi,
           CustomerController.customersApi,
           CustomerController.customerApi,
           CustomerController.customerKeypairsApi,

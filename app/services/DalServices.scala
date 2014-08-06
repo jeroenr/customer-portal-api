@@ -64,11 +64,11 @@ object CustomerService {
 	}
 
 	def byLoginName(name: String) = transaction {
-		Customer.byLoginName(name).map { c => Map("name" -> c.name, "login_name" -> c.login_name, "password_value" -> c.password_value)}
+		Customer.byLoginName(name).map { c => Map("id" -> c.id.toString, "name" -> c.name, "login_name" -> c.login_name, "password_value" -> c.password_value)}
 	}
 
 	def keypairs(id: Long) = transaction {
-		Customer.byId(id).map(_.keypairs.map{ kp => Map("auth_key" -> kp.auth_key, "auth_secret" -> kp.auth_secret)})
+		Customer.byId(id).map(_.keypairs.map{ kp => Map("id" -> kp.id,"auth_key" -> kp.auth_key, "auth_secret" -> kp.auth_secret)}.toList.reverse)
 	}
 
 	def deleteKeypair(id: Long, keypair: Long) = transaction {

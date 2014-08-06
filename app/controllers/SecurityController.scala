@@ -49,7 +49,7 @@ object SecurityController {
       authResp match {
         case (true, Some(customer: Map[String, String])) =>
           Logger.info(s"User ${customer("login_name")} is authorized for this session")
-          action(new AuthenticatedRequest(Some(customer), request))
+          action(new AuthenticatedRequest(Some(customer - "password_value"), request))
         case _ =>
           Logger.info(s"Authorization headers ${authHeaders.get} are not accepted")
           Future.successful(Unauthorized.withHeaders("WWW-Authenticate" -> "Basic realm=\"ChatSavvy\"").asJsonWithAccessControlHeaders)
