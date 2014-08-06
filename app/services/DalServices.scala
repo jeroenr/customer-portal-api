@@ -60,6 +60,15 @@ object CustomerService {
 	def byId(id: Long) = transaction {
 		Customer.byId(id).map(toJson(_))
 	}
+
+	def keypairs(id: Long) = transaction {
+		Customer.byId(id).map(_.keypairs.map{ kp => Map("auth_key" -> kp.auth_key, "auth_secret" -> kp.auth_secret)})
+	}
+
+	def deleteKeypair(id: Long, keypair: Long) = transaction {
+		val kp = Customer.byId(id).get.keypairs.find(_.id == keypair).get
+		Library.keypairs.delete(kp.id)
+	}
 }
 
 object KeyService {

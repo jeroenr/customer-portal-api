@@ -27,8 +27,9 @@ POST        /api/customers                  controllers.CustomerController.creat
 GET			/api/customers/:id 		       controllers.CustomerController.byId(id: Long)
 DELETE  	/api/customers/:id             controllers.CustomerController.delete(id: Long)
 
-GET			/api/customers/:id/keypair	   controllers.CustomerController.keypair(id: Long)
-PUT			/api/customers/:id/keypair     controllers.CustomerController.regenerateKeypair(id: Long)
+GET			/api/customers/:id/keypairs	    controllers.CustomerController.keypairs(id: Long)
+POST		/api/customers/:id/keypairs     controllers.CustomerController.createKeypair(id: Long)
+DELETE      /api/customers/:id/keypairs/:keypair controllers.CustomerController.deleteKeypair(id: Long, keypair: Long)
 
 # Api docs
 GET         /api/resources.json             controllers.ApiDocs.discover

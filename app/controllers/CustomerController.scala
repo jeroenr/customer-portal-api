@@ -31,8 +31,8 @@ object CustomerController extends Controller with JsonActions {
 
   lazy val customersApi = Api("/customers") describedBy "A customers API" withOperations(listOperation, createOperation)
   lazy val customerApi = Api("/customers/{customerId}") describedBy "A customer API" withOperations(showOperation, updateOperation, deleteOperation)
-  lazy val customerKeypairApi = Api("/customers/{customerId}/keypair") describedBy "A customer keypair API" withOperations(keypairOperation, regenerateKeypairOperation)
-
+  lazy val customerKeypairsApi = Api("/customers/{customerId}/keypairs") describedBy "A customer keypairs API" withOperations(keypairOperation, regenerateKeypairOperation)
+  lazy val customerKeypairApi = Api("/customers/{customerId}/keypairs/{keypairId}") describedBy "A customer keypair API" withOperations(deleteKeypairOperation)
 
   lazy val listOperation = Operation("listCustomer", GET, "List all customers") takes(
     QueryParam("page.num", String) is Pager.CONSTRAINTS_DESC,
@@ -45,7 +45,7 @@ object CustomerController extends Controller with JsonActions {
     PathParam("CustomerId", String) is "The customer id"
     )
 
-  lazy val regenerateKeypairOperation = Operation("regenerateCustomerKeypair", PUT, "Regenerate customer keypair") takes (
+  lazy val regenerateKeypairOperation = Operation("regenerateCustomerKeypair", POST, "Regenerate customer keypair") takes (
     PathParam("CustomerId", String) is "The customer id"
     )
   lazy val createOperation = Operation("createOrUpdateCustomer", POST, "Create a customer") takes(
@@ -57,6 +57,11 @@ object CustomerController extends Controller with JsonActions {
   lazy val updateOperation = Operation("createOrUpdateCustomer", PUT, "Update a customer") takes(
     PathParam("customerId", String) is "The customer id",
     BodyParam(String)
+    )
+
+  lazy val deleteKeypairOperation = Operation("deleteKeypair", DELETE, "Delete a keypair") takes(
+    PathParam("customerId", String) is "The customer id",
+    PathParam("keypairId", String) is "The keypair id"
     )
 
   def delete(id: Long) = JsonDeleteAction {
@@ -86,21 +91,32 @@ object CustomerController extends Controller with JsonActions {
       }
   }
 
-  def keypair(id: Long) = JsonGetAction {
+  def keypairs(id: Long) = JsonGetAction {
     implicit request =>
-      CustomerService.byId(id) match {
-        case Some(customer) => Ok(customer)
+      CustomerService.keypairs(id) match {
+        case Some(keypairs) => Ok(Map("keypairs" -> keypairs).toJson)
         case _ => NotFound
       }
   }
 
-  def regenerateKeypair(id: Long) = JsonGetAction {
+  def createKeypair(id: Long) = JsonGetAction {
     implicit request =>
       val isRegenerated = Try(CustomerService.regenerateKeypair(id))
       isRegenerated match {
         case Success(_) => Ok
         case Failure(f) => 
           Logger.error(s"Couldn't update customer [$id]", f)
+          NotFound(wrapExceptionInJson(f))
+      }
+  }
+
+  def deleteKeypair(id: Long, keypair: Long) = JsonDeleteAction {
+    implicit request =>
+      Try(CustomerService.deleteKeypair(id, keypair)) match {
+        case Success(true) => Ok
+        case Success(_) => Accepted
+        case Failure(f) => 
+          Logger.error(s"Couldn't delete keypair [$keypair]", f)
           NotFound(wrapExceptionInJson(f))
       }
   }
