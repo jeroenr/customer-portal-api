@@ -51,6 +51,12 @@ object Customer {
       select(u)
   ).headOption
 
+  def byLoginName(name: String) = fromCustomers(
+    u =>
+      where(u.login_name === name)
+      select(u)
+  ).headOption
+
 }
 
 class Key(

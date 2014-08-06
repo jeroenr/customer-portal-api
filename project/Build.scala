@@ -16,6 +16,8 @@ object ApplicationBuild extends Build {
     "net.sourceforge.jtds" % "jtds" % "1.3.1",
     "org.webjars" %% "webjars-play" % "2.2.1",
     "org.squeryl" %% "squeryl" % "0.9.5-6",
+    "org.mindrot" % "jbcrypt" % "0.3m",
+     "commons-codec" % "commons-codec" % "1.9",
 
     // Swagger
     "net.eamelink" %% "swaggerkit-play2" % "0.2.0-SNAPSHOT" exclude("org.scala-stm", "scala-stm_2.10.0") exclude("play","play_2.10") excludeAll(ExclusionRule(organization = "com.typesafe.play"))

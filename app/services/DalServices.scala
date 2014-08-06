@@ -6,6 +6,7 @@ import binders.{Pager}
 import scala.util.Random
 import scala.annotation.tailrec
 import net.fromamsterdamwithlove.json.utils.JsonUtil._
+import org.mindrot.jbcrypt.BCrypt
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,8 +32,9 @@ object CustomerService {
 		val key = KeyService.uniqueKey(20)
       	val secret = KeyService.uniqueKey(20)
       	val password_value = KeyService.uniqueKey(8)
-      	// TODO: hash password
-	    val customer = new Customer(name, login_name, password_value)
+      	// BCrypt.checkpw(password, passwordHash)
+      	val passwordHash = BCrypt.hashpw(password_value, BCrypt.gensalt)
+	    val customer = new Customer(name, login_name, passwordHash)
 		
 		transaction {		
 			Library.customers.insert(customer)
@@ -59,6 +61,10 @@ object CustomerService {
 
 	def byId(id: Long) = transaction {
 		Customer.byId(id).map(toJson(_))
+	}
+
+	def byLoginName(name: String) = transaction {
+		Customer.byLoginName(name).map { c => Map("name" -> c.name, "login_name" -> c.login_name, "password_value" -> c.password_value)}
 	}
 
 	def keypairs(id: Long) = transaction {

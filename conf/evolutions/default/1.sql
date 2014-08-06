@@ -35,6 +35,9 @@ CREATE TABLE key_register (
     PRIMARY KEY (id)
 ); 
 
+INSERT INTO customer (name, login_name, password_value)
+VALUES ('admin','adm','$2a$10$spALFU/13QVNIh1AmNUA0uYwagKVL5OqmmqgsqLhoUFcqOCdIInzm');
+
 # --- !Downs
  
 DROP TABLE user;
