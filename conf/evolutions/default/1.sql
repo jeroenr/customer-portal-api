@@ -27,4 +27,4 @@ CREATE TABLE key_register (
  
 DROP TABLE user;
 DROP TABLE customer;
-DROP TABLE key;
+DROP TABLE key_register;
