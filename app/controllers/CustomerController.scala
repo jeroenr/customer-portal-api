@@ -67,7 +67,7 @@ object CustomerController extends Controller with JsonActions {
 
   def list(page: Pager) = JsonGetAction {
     implicit request => {
-        Ok(toJson(CustomerService.all(page)))
+        Ok(toJson(Map("customers" -> CustomerService.all(page))))
     }
   }
 
