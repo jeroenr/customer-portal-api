@@ -28,10 +28,9 @@ object UserService {
 }
 
 object CustomerService {
-	def create(name: String, login_name: String) = {
+	def create(name: String, login_name: String, password_value: String) = {
 		val key = KeyService.uniqueKey(20)
       	val secret = KeyService.uniqueKey(20)
-      	val password_value = KeyService.uniqueKey(8)
       	// BCrypt.checkpw(password, passwordHash)
       	val passwordHash = BCrypt.hashpw(password_value, BCrypt.gensalt)
 	    val customer = new Customer(name, login_name, passwordHash)
@@ -68,7 +67,7 @@ object CustomerService {
 	}
 
 	def keypairs(id: Long) = transaction {
-		Customer.byId(id).map(_.keypairs.map{ kp => Map("id" -> kp.id,"auth_key" -> kp.auth_key, "auth_secret" -> kp.auth_secret)}.toList.reverse)
+		Customer.byId(id).map(_.keypairs.map{ kp => Map("id" -> kp.id,"auth_key" -> kp.auth_key, "auth_secret" -> kp.auth_secret, "created_at" -> kp.created_at)}.toList.reverse)
 	}
 
 	def deleteKeypair(id: Long, keypair: Long) = transaction {

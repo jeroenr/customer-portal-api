@@ -17,10 +17,15 @@ trait JsonSchemas {
       |        "login_name": {
       |            "type": "string",
       |            "minLength": 1
+      |        },
+      |         "password": {
+      |            "type": "string",
+      |            "minLength": 8,
+      |            "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*[ ]).*$"
       |        }
       |    },
       |    "required": [
-      |        "name", "login_name"
+      |        "name", "login_name", "password"
       |    ],
       |    "additionalProperties": false
       |}

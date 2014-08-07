@@ -82,7 +82,8 @@ object CustomerController extends Controller with JsonActions {
 
   def create = JsonPostAction("customer-create") {
     implicit parameterMap => {
-      val customer = CustomerService.create(parameterMap("name").asInstanceOf[String], parameterMap("login_name").asInstanceOf[String])
+      val stringParams = parameterMap.asInstanceOf[Map[String, String]]
+      val customer = CustomerService.create(stringParams("name"), stringParams("login_name"), stringParams("password"))
       Created(customer)
     }
   }
