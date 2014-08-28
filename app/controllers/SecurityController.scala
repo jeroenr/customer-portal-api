@@ -24,6 +24,10 @@ import services._
 import org.mindrot.jbcrypt.BCrypt
 import collection.Map
 import org.apache.commons.codec.binary.Base64
+import com.nimbusds.jose.crypto._
+import com.nimbusds.jwt._
+import com.nimbusds.jose._
+import java.util.Date
 
 /**
  * Created by jeroen on 1/14/14.
@@ -85,6 +89,17 @@ object SecurityController {
           return Some(usernamePassword(0), usernamePassword.splitAt(1)._2.mkString)
       }
       None
+  }
+
+  def generateAccessToken(key:String, secret: String, user: String) = {
+    val signer = new MACSigner(secret.getBytes)
+    val claimsSet = new JWTClaimsSet
+    claimsSet.setIssueTime(new Date)
+    claimsSet.setIssuer(key)
+    claimsSet.setCustomClaim("user", user)
+    val signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claimsSet)
+    signedJWT.sign(signer)
+    signedJWT.serialize
   }
 
 }

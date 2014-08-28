@@ -17,6 +17,7 @@ object ApplicationBuild extends Build {
     "org.webjars" %% "webjars-play" % "2.2.1",
     "org.squeryl" %% "squeryl" % "0.9.5-6",
     "org.mindrot" % "jbcrypt" % "0.3m",
+    "com.nimbusds" % "nimbus-jose-jwt" % "3.1.1",
      "commons-codec" % "commons-codec" % "1.9",
 
     // Swagger
