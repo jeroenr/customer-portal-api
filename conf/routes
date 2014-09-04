@@ -36,6 +36,8 @@ DELETE      /api/customers/:id/keypairs/:keypair controllers.CustomerController.
 GET         /api/resources.json             controllers.ApiDocs.discover
 GET         /api/:id.json                   controllers.ApiDocs.resource(id)
 
+GET			/demo/:user/token			    controllers.DemoController.generateDemoToken(user)
+
 # JSON schemas
 GET         /schema/:schemaName.json        controllers.JsonSchemaController.schema(schemaName)
 
