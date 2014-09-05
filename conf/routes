@@ -6,6 +6,7 @@
 GET         /                               controllers.ApiDocs.ui
 
 OPTIONS     /api/*url                       controllers.Application.options(url)
+OPTIONS     /demo/*url                      controllers.Application.options(url)
 
 POST        /api/users/search           controllers.UserController.search(page: Pager)
 GET         /api/users/fieldmapping     controllers.UserController.fieldMapping
