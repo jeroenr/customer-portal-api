@@ -202,7 +202,7 @@ object UserController extends Controller with JsonActions {
         case Failure(f) =>
           Logger.error("Failed to create user", f)
           InternalServerError(wrapExceptionInJson(f))
-        case Success(_) => Created
+        case Success(_) => Created(parameterMap.toJson)
       }
     }
   }
@@ -215,7 +215,7 @@ object UserController extends Controller with JsonActions {
         case Failure(f) =>
           Logger.error(s"Failed to update user [$id]", f)
           InternalServerError(wrapExceptionInJson(f))
-        case Success(_) => Ok
+        case Success(_) => Ok((parameterMap + ("id" -> id)).toJson )
       }
     }
   }
